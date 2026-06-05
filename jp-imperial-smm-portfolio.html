@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jp Imperial — Social Media & Content Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --surface: #111111;
+    --surface2: #181818;
+    --border: rgba(255,255,255,0.08);
+    --amber: #F5A623;
+    --amber-dim: rgba(245,166,35,0.12);
+    --white: #f5f2ec;
+    --muted: rgba(245,242,236,0.45);
+    --dimmer: rgba(245,242,236,0.22);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--amber);
+    overflow: hidden;
+    height: 36px;
+    display: flex;
+    align-items: center;
+  }
+  .ticker-track {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 32s linear infinite;
+    will-change: transform;
+  }
+  .ticker-item {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    padding: 0 2.5rem;
+  }
+  .ticker-dot { color: rgba(10,10,10,0.4); padding: 0 0.5rem; }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 36px; left: 0; right: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    height: 64px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--amber); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--amber);
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 140px 3rem 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(245,166,35,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(245,166,35,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid-overlay {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--amber);
+  }
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 9vw, 130px);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    color: var(--white);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s ease forwards;
+  }
+  .hero-headline em {
+    font-style: normal;
+    color: var(--amber);
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px var(--amber);
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s ease forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.65s ease forwards;
+  }
+  .btn-primary {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--black);
+    background: var(--amber);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-ghost {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.25); }
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2.5rem; right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s 1.2s ease forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 48px;
+    background: linear-gradient(to bottom, var(--amber), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  .scroll-text {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dimmer);
+    writing-mode: vertical-rl;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.15); }
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 3rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-item {
+    padding: 0 2rem;
+    border-right: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .stat-item:first-child { padding-left: 0; }
+  .stat-item:last-child { border-right: none; }
+  .stat-item.visible { opacity: 1; transform: translateY(0); }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .stat-num .amber { color: var(--amber); }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+  .stat-sub { font-size: 12px; color: var(--dimmer); margin-top: 0.25rem; }
+
+  /* SECTION */
+  section { padding: 6rem 3rem; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--amber);
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: rgba(245,242,236,0.55); }
+  .section-intro {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.75;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* CASE STUDY */
+  .case-study {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+  .case-left {
+    padding: 3rem;
+    border-right: 1px solid var(--border);
+  }
+  .case-right { padding: 3rem; }
+  .case-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    border: 1px solid rgba(245,166,35,0.3);
+    padding: 4px 12px;
+    margin-bottom: 1.5rem;
+  }
+  .case-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    line-height: 1.2;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .case-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+  .timeline { display: flex; flex-direction: column; }
+  .timeline-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .t-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--amber);
+    min-width: 52px;
+    padding-top: 2px;
+  }
+  .t-content { flex: 1; }
+  .t-heading { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; }
+  .t-body { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .metric-cell { background: var(--surface2); padding: 1.5rem; }
+  .metric-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .metric-big .amber { color: var(--amber); }
+  .metric-small-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+  .metric-note { font-size: 11px; color: var(--dimmer); margin-top: 0.25rem; }
+
+  /* PLATFORMS */
+  .platforms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+  .platform-card {
+    background: var(--surface);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .platform-card:hover { background: var(--surface2); }
+  .platform-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--amber);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .platform-card:hover::before { transform: scaleX(1); }
+  .platform-name {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+  }
+  .platform-stat {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.02em;
+  }
+  .platform-context { font-size: 12px; color: var(--muted); line-height: 1.6; margin-top: 0.5rem; }
+
+  /* SKILLS */
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+  .skills-list { display: flex; flex-direction: column; }
+  .skill-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+    gap: 1.5rem;
+    opacity: 0;
+    transform: translateX(-16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .skill-row.visible { opacity: 1; transform: translateX(0); }
+  .skill-name { font-size: 14px; font-weight: 500; color: var(--white); flex: 1; }
+  .skill-bar-wrap {
+    width: 120px; height: 2px;
+    background: rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-bar {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    background: var(--amber);
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .skill-pct {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--muted);
+    min-width: 36px;
+    text-align: right;
+  }
+  .tools-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem;
+  }
+  .tools-title {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .tools-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tool-tag {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    transition: border-color 0.2s, color 0.2s;
+    cursor: default;
+  }
+  .tool-tag:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* AI SECTION */
+  .ai-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .ai-inner { padding: 6rem 3rem; }
+  .ai-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+  .ai-statement {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    line-height: 1.3;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .ai-statement em { font-style: italic; color: var(--amber); }
+  .ai-context {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+  .ai-badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    border: 1px solid rgba(245,166,35,0.3);
+    padding: 5px 14px;
+    margin-bottom: 2rem;
+  }
+  .ai-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .ai-tool-card {
+    background: var(--surface2);
+    padding: 1.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .ai-tool-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--amber);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .ai-tool-card:hover::after { transform: scaleX(1); }
+  .ai-tool-card:hover { background: #1d1d1d; }
+  .ai-tool-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .ai-tool-use { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .ai-workflow-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-top: 1.5rem;
+  }
+  .ai-workflow-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .ai-workflow-item:last-child { border-bottom: none; }
+  .ai-workflow-icon {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--amber);
+    min-width: 64px;
+    padding-top: 2px;
+  }
+  .ai-workflow-body { flex: 1; }
+  .ai-workflow-title { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; }
+  .ai-workflow-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* WORK SAMPLES */
+  .samples-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 3rem;
+  }
+  .sample-card {
+    background: var(--surface);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .sample-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 1;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    pointer-events: none;
+    user-select: none;
+  }
+  .sample-tag {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+  }
+  .sample-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  .sample-body { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .sample-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .sample-pill {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    padding: 4px 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* ABOUT */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-avatar {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-initials {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.06);
+  }
+  .avatar-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .avatar-amber-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--amber);
+  }
+  .about-handle { font-size: 12px; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+  .about-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.5rem; }
+  .about-role { font-size: 12px; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; }
+  .about-bio { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
+  .about-bio strong { color: var(--white); font-weight: 500; }
+  .cred-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .cred-item { background: var(--surface); padding: 1.5rem; }
+  .cred-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .cred-val .amber { color: var(--amber); }
+  .cred-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 6rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(245,166,35,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-eyebrow { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.5rem; }
+  .cta-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 4vw, 60px);
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 1rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-headline em { font-style: italic; color: var(--amber); }
+  .cta-sub { font-size: 14px; color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .cta-note { font-size: 11px; color: var(--dimmer); margin-top: 1.5rem; letter-spacing: 0.05em; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; }
+  .footer-logo span { color: var(--amber); }
+  .footer-copy { font-size: 11px; color: var(--dimmer); letter-spacing: 0.05em; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dimmer); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--amber); }
+  .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 130px 1.5rem 4rem; }
+    section { padding: 4rem 1.5rem; }
+    .ai-inner { padding: 4rem 1.5rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 3rem 1.5rem; }
+    .stat-item { padding: 1.5rem 1rem; }
+    .case-study { grid-template-columns: 1fr; }
+    .case-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .platforms-grid { grid-template-columns: 1fr 1fr; }
+    .skills-layout { grid-template-columns: 1fr; }
+    .samples-grid { grid-template-columns: 1fr; }
+    .about-layout { grid-template-columns: 1fr; }
+    .about-avatar { aspect-ratio: 1; }
+    .ai-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .ai-tools-grid { grid-template-columns: repeat(2, 1fr); }
+    .cred-list { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; padding: 2rem 1.5rem; }
+    .divider { margin: 0 1.5rem; }
+  }
+  @media (max-width: 540px) {
+    .platforms-grid { grid-template-columns: 1fr; }
+    .ai-tools-grid { grid-template-columns: 1fr 1fr; }
+    .hero-headline { font-size: 58px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">SMM <span class="ticker-dot">·</span> Social Media Management</span>
+    <span class="ticker-item">Content Strategy <span class="ticker-dot">·</span> LinkedIn Growth</span>
+    <span class="ticker-item">512 → 7,700+ LinkedIn Followers <span class="ticker-dot">·</span> 15× Growth</span>
+    <span class="ticker-item">86 Transactions Influenced <span class="ticker-dot">·</span> Zero Paid Ads</span>
+    <span class="ticker-item">2× ICON Award <span class="ticker-dot">·</span> Consecutive Years</span>
+    <span class="ticker-item">AI-Augmented Workflows <span class="ticker-dot">·</span> Claude · ChatGPT · Gemini · Perplexity</span>
+    <span class="ticker-item">181.3% Video Audience Growth <span class="ticker-dot">·</span> Facebook YoY</span>
+    <span class="ticker-item">30% Team Efficiency Improvement <span class="ticker-dot">·</span> Agent Coordination</span>
+    <span class="ticker-item">SMM <span class="ticker-dot">·</span> Social Media Management</span>
+    <span class="ticker-item">Content Strategy <span class="ticker-dot">·</span> LinkedIn Growth</span>
+    <span class="ticker-item">512 → 7,700+ LinkedIn Followers <span class="ticker-dot">·</span> 15× Growth</span>
+    <span class="ticker-item">86 Transactions Influenced <span class="ticker-dot">·</span> Zero Paid Ads</span>
+    <span class="ticker-item">2× ICON Award <span class="ticker-dot">·</span> Consecutive Years</span>
+    <span class="ticker-item">AI-Augmented Workflows <span class="ticker-dot">·</span> Claude · ChatGPT · Gemini · Perplexity</span>
+    <span class="ticker-item">181.3% Video Audience Growth <span class="ticker-dot">·</span> Facebook YoY</span>
+    <span class="ticker-item">30% Team Efficiency Improvement <span class="ticker-dot">·</span> Agent Coordination</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">JP<span>.</span>Imperial</a>
+  <ul class="nav-links">
+    <li><a href="#results">Results</a></li>
+    <li><a href="#case-study">Case Study</a></li>
+    <li><a href="#ai-section">AI Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#work-samples">Work</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="https://www.linkedin.com/in/jpimperial" target="_blank" rel="noopener" class="nav-cta">Message on LinkedIn</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-label">Social Media & Content Strategy Portfolio</div>
+  <h1 class="hero-headline">
+    Content that<br>
+    <em>compounds.</em><br>
+    Results that<br>
+    stick.
+  </h1>
+  <p class="hero-sub">
+    Three years. Six platforms. 86 transactions influenced for a real estate team — with zero paid ads. This is what systematic social media management looks like when it's built to compound, not campaign.
+  </p>
+  <div class="hero-actions">
+    <a href="#case-study" class="btn-primary">See the Case Study</a>
+    <a href="#skills" class="btn-ghost">View Skills &amp; Tools</a>
+  </div>
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar" id="results">
+  <div class="stat-item" data-delay="0">
+    <div class="stat-num counter" data-target="15" data-suffix="×">0×</div>
+    <div class="stat-label">LinkedIn audience growth</div>
+    <div class="stat-sub">512 → 7,700+ followers</div>
+  </div>
+  <div class="stat-item" data-delay="150">
+    <div class="stat-num counter" data-target="86">0</div>
+    <div class="stat-label">Transactions influenced</div>
+    <div class="stat-sub">3 years, zero paid ads</div>
+  </div>
+  <div class="stat-item" data-delay="300">
+    <div class="stat-num"><span class="amber">2</span>×</div>
+    <div class="stat-label">ICON awards</div>
+    <div class="stat-sub">Consecutive, eXp Realty</div>
+  </div>
+  <div class="stat-item" data-delay="450">
+    <div class="stat-num counter" data-target="181" data-suffix="%">0%</div>
+    <div class="stat-label">Video audience growth</div>
+    <div class="stat-sub">Facebook YoY, >1 min watch</div>
+  </div>
+</div>
+
+<!-- CASE STUDY -->
+<section id="case-study">
+  <div class="section-label">Featured Case Study</div>
+  <h2 class="section-title reveal">Alpine Legacy — <em>eXp Realty CO</em></h2>
+  <p class="section-intro reveal">A 3-year embedded SMM engagement that rebuilt a real estate team's entire digital identity across six platforms — and let it compound into back-to-back ICON awards.</p>
+
+  <div class="case-study reveal">
+    <div class="case-left">
+      <div class="case-tag">Dec 2022 — Nov 2025</div>
+      <h3 class="case-title">From a near-invisible digital footprint to 2× ICON.</h3>
+      <p class="case-desc">Alpine Legacy had inconsistent presence across every platform — 512-follower LinkedIn, underperforming Facebook video, untouched Instagram, and no GBP strategy. The brief: rebuild the full digital identity from scratch and let it compound without paid ads or posting chaos.</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="t-year">2022</div>
+          <div class="t-content">
+            <div class="t-heading">Full baseline audit — 6 platforms</div>
+            <div class="t-body">SWOT across LinkedIn, Facebook, Instagram, YouTube, GBP. Identified gaps: no brand coherence, low video strategy, 512 LinkedIn connections, 225 IG followers, no YouTube channel setup.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-year">2023</div>
+          <div class="t-content">
+            <div class="t-heading">Full rebuild — content systems deployed</div>
+            <div class="t-body">52-week content calendar authored. LinkedIn daily connection cadence (20/day) launched. Reels strategy deployed. Property landing pages built in KVCore + Luxury Presence with MailChimp email sequences. GBP activated.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-year">2024</div>
+          <div class="t-content">
+            <div class="t-heading">Compounding — ICON Year 2</div>
+            <div class="t-body">FB video watch-time up 181.3% YoY. Reels reaching 95.1% non-follower audiences. 15% YoY community engagement growth, 25% lead generation increase. Second consecutive ICON secured.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-year">2025</div>
+          <div class="t-content">
+            <div class="t-heading">Authority compounded — 7,700+ LinkedIn</div>
+            <div class="t-body">LinkedIn audience reaches 7,700+ from 512 baseline. 86 total transactions influenced over the engagement. Zero paid ad spend across all 3 years.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="case-right">
+      <div class="metric-grid">
+        <div class="metric-cell">
+          <div class="metric-big">4<span class="amber">→</span>38</div>
+          <div class="metric-small-label">Transactions · Year One</div>
+          <div class="metric-note">850% increase. First ICON.</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-big">28</div>
+          <div class="metric-small-label">Transactions · Year Two</div>
+          <div class="metric-note">Second consecutive ICON.</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-big">30<span class="amber">%</span></div>
+          <div class="metric-small-label">Team output efficiency</div>
+          <div class="metric-note">Directing agents, YoY.</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-big"><span class="amber">$0</span></div>
+          <div class="metric-small-label">Paid ad spend</div>
+          <div class="metric-note">All outcomes organic.</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:1.25rem;">
+        The engagement wasn't about posting more — it was about posting <em style="color:var(--white);">smarter</em>. Every platform served a specific role: LinkedIn for authority, short-form video for discovery, GBP for search-intent capture, email sequences for lead nurture.
+      </p>
+      <p style="font-size:13px;color:var(--muted);line-height:1.75;">
+        All content was ghostwritten to match Sam's authentic voice. A structured brand voice intake system was built first — then used consistently for three years. The result: a presence that felt genuinely human and performed in analytics.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PLATFORM RESULTS -->
+<section>
+  <div class="section-label">Platform Results</div>
+  <h2 class="section-title reveal">Six platforms. <em>One coherent system.</em></h2>
+  <p class="section-intro reveal">Each platform was treated as a different tool with a specific job — not replicated content pushed everywhere.</p>
+  <div class="platforms-grid">
+    <div class="platform-card reveal">
+      <div class="platform-name">LinkedIn — Personal</div>
+      <div class="platform-stat">15×</div>
+      <div class="platform-context">512 → 7,700+ followers over 3 years. 20 daily connection requests, authority content cadence, engagement strategy, and brand voice consistency rebuilt Sam's professional presence from near-zero.</div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="platform-name">Facebook</div>
+      <div class="platform-stat">181%</div>
+      <div class="platform-context">Video watch-time audience growth YoY (viewers >1 min). Highest single video: 2,500 organic views. Reels effectiveness: 95.1% of views from new audiences — 1,192 non-follower views.</div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="platform-name">Instagram</div>
+      <div class="platform-stat">95%</div>
+      <div class="platform-context">New-audience reach via Reels. Platform rebuilt from an inconsistent baseline: no bio link, no story highlights, no Reels strategy. All resolved in the first-quarter rebuild.</div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="platform-name">Google Business Profile</div>
+      <div class="platform-stat">40–60%</div>
+      <div class="platform-context">Increase in profile visibility and local search discovery. Weekly post cadence, review velocity strategy, and category alignment built from scratch.</div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="platform-name">Email & Landing Pages</div>
+      <div class="platform-stat">Full</div>
+      <div class="platform-context">Property landing pages built inside KVCore and Luxury Presence. MailChimp email sequences designed and deployed for listing promotion and lead nurture flows.</div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="platform-name">YouTube</div>
+      <div class="platform-stat">Setup</div>
+      <div class="platform-context">Full channel setup from scratch: branded banner, channel trailer, About page with SEO-optimized area coverage, playlist architecture, and Shorts strategy documented and deployed.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AI SECTION -->
+<div class="ai-section" id="ai-section">
+  <div class="ai-inner">
+    <div class="section-label">AI-Augmented Workflows</div>
+    <h2 class="section-title reveal">I use AI as a <em>force multiplier</em> — not a shortcut.</h2>
+
+    <div class="ai-grid">
+      <div class="reveal">
+        <div class="ai-badge">Intermediate Practitioner</div>
+        <p class="ai-context">
+          I work with AI tools daily — across research, drafting, ideation, and workflow design. My proficiency sits at a working intermediate level: I'm past the prompt-and-paste stage, but I'm not writing model code or fine-tuning. What I can do is build functional custom AI setups — custom GPTs, structured prompt systems, and multi-tool workflows — and use them to produce real output faster than a manual workflow would.
+        </p>
+        <p class="ai-context">
+          In practice, this means: a first draft is never the starting point. AI handles the blank page. I handle judgment, voice, and strategy.
+        </p>
+        <div class="ai-workflow-list">
+          <div class="ai-workflow-item">
+            <div class="ai-workflow-icon">Draft</div>
+            <div class="ai-workflow-body">
+              <div class="ai-workflow-title">Ghostwriting acceleration</div>
+              <div class="ai-workflow-desc">AI generates first drafts calibrated to a documented brand voice. I refine, inject authenticity, and approve. Reduces writing time by 50–70% without sacrificing tone consistency.</div>
+            </div>
+          </div>
+          <div class="ai-workflow-item">
+            <div class="ai-workflow-icon">Ideate</div>
+            <div class="ai-workflow-body">
+              <div class="ai-workflow-title">Content ideation & angle generation</div>
+              <div class="ai-workflow-desc">Use AI to rapidly generate post angles, hooks, and content series ideas — then filter for brand fit and audience relevance. Replaces 2-hour ideation sessions with 15-minute sprints.</div>
+            </div>
+          </div>
+          <div class="ai-workflow-item">
+            <div class="ai-workflow-icon">Research</div>
+            <div class="ai-workflow-body">
+              <div class="ai-workflow-title">Audience & competitive research</div>
+              <div class="ai-workflow-desc">Multi-tool research stack: Perplexity for current-state web research, Claude for synthesis and analysis, ChatGPT for audience persona development and positioning language.</div>
+            </div>
+          </div>
+          <div class="ai-workflow-item">
+            <div class="ai-workflow-icon">Build</div>
+            <div class="ai-workflow-body">
+              <div class="ai-workflow-title">Custom AI configurations</div>
+              <div class="ai-workflow-desc">Built and deployed custom GPTs and Claude Projects with role-specific instructions, tone guidelines, and context libraries — turning general AI into client-specific content tools.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="tools-title" style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Daily AI Stack</div>
+        <div class="ai-tools-grid">
+          <div class="ai-tool-card">
+            <div class="ai-tool-name">Claude</div>
+            <div class="ai-tool-use">Long-form drafting, strategy synthesis, brand voice work, and custom Project setups for client-specific content pipelines.</div>
+          </div>
+          <div class="ai-tool-card">
+            <div class="ai-tool-name">ChatGPT</div>
+            <div class="ai-tool-use">Custom GPT builds, persona development, caption and copy ideation, and rapid content variation generation.</div>
+          </div>
+          <div class="ai-tool-card">
+            <div class="ai-tool-name">Gemini</div>
+            <div class="ai-tool-use">Google Workspace integration, document-level drafting, and cross-referencing with Drive assets in live workflows.</div>
+          </div>
+          <div class="ai-tool-card">
+            <div class="ai-tool-name">Perplexity</div>
+            <div class="ai-tool-use">Real-time web research, competitive intelligence, trend monitoring, and sourced fact-checking for content strategy.</div>
+          </div>
+          <div class="ai-tool-card">
+            <div class="ai-tool-name">Copilot</div>
+            <div class="ai-tool-use">Microsoft 365 integration — editing, summarizing, and restructuring documents and presentations inside existing workflows.</div>
+          </div>
+          <div class="ai-tool-card">
+            <div class="ai-tool-name">Manus</div>
+            <div class="ai-tool-use">Agentic task execution — multi-step research and content generation flows that run with minimal manual intervention.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Capabilities</div>
+  <h2 class="section-title reveal">Skills & <em>Tools</em></h2>
+  <p class="section-intro reveal">Built across real client work — not theoretical frameworks.</p>
+  <div class="skills-layout">
+    <div class="skills-list">
+      <div class="skill-row" data-pct="95"><span class="skill-name">Content Strategy & Planning</span><div class="skill-bar-wrap"><div class="skill-bar"></div></div><span class="skill-pct">95</span></div>
+      <div class="skill-row" data-pct="92"><span class="skill-name">LinkedIn Growth & Management</span><div class="skill-bar-wrap"><div class="skill-bar"></div></div><span class="skill-pct">92</span></div>
+      <div class="skill-row" data-pct="88"><span class="skill-name">Facebook & Instagram SMM</span><div class="skill-bar-wrap"><div class="skill-bar"></div></div><span class="skill-pct">88</span></div>
+      <div class="skill-row" data-pct="90"><span class="skill-name">Ghostwriting & Brand Voice</span><div class="skill-bar-wrap"><div class="skill-bar"></div></div><span class="skill-pct">90</span></div>
+      <div class="skill-row" data-pct="85"><span class="skill-name">Short-Form Video Strategy</span><div class="skill-bar-wrap"><div class="skill-bar"></div></div><span class="skill-pct">85</span></div>
+      <div class="skill-row" data-pct="82"><span class="skill-name">Social Analytics & Reporting</span><div class="skill-bar-wrap"><div class="skill-bar"></div></div><span class="skill-pct">82</span></div>
+      <div class="skill-row" data-pct="85"><span class="skill-name">AI-Augmented Content Workflows</span><div class="skill-bar-wrap"><div class="skill-bar"></div></div><span class="skill-pct">85</span></div>
+      <div class="skill-row" data-pct="80"><span class="skill-name">Email Marketing & Landing Pages</span><div class="skill-bar-wrap"><div class="skill-bar"></div></div><span class="skill-pct">80</span></div>
+      <div class="skill-row" data-pct="78"><span class="skill-name">Google Business Profile</span><div class="skill-bar-wrap"><div class="skill-bar"></div></div><span class="skill-pct">78</span></div>
+    </div>
+    <div>
+      <div class="tools-panel reveal">
+        <div class="tools-title">Platforms & Tools</div>
+        <div class="tools-grid">
+          <span class="tool-tag">LinkedIn</span>
+          <span class="tool-tag">Meta Business Suite</span>
+          <span class="tool-tag">Instagram</span>
+          <span class="tool-tag">YouTube Studio</span>
+          <span class="tool-tag">Google Business Profile</span>
+          <span class="tool-tag">KVCore</span>
+          <span class="tool-tag">Luxury Presence</span>
+          <span class="tool-tag">MailChimp</span>
+          <span class="tool-tag">Canva</span>
+          <span class="tool-tag">CapCut</span>
+          <span class="tool-tag">Asana</span>
+          <span class="tool-tag">Google Workspace</span>
+          <span class="tool-tag">Microsoft 365</span>
+          <span class="tool-tag">GitHub</span>
+          <span class="tool-tag">Meta Insights</span>
+          <span class="tool-tag">LinkedIn Analytics</span>
+        </div>
+      </div>
+      <div class="tools-panel reveal" style="margin-top:1px;">
+        <div class="tools-title">AI Tools</div>
+        <div class="tools-grid">
+          <span class="tool-tag">Claude</span>
+          <span class="tool-tag">ChatGPT</span>
+          <span class="tool-tag">Gemini</span>
+          <span class="tool-tag">Perplexity</span>
+          <span class="tool-tag">Microsoft Copilot</span>
+          <span class="tool-tag">Manus</span>
+          <span class="tool-tag">Custom GPTs</span>
+          <span class="tool-tag">Claude Projects</span>
+        </div>
+      </div>
+      <div class="tools-panel reveal" style="margin-top:1px;">
+        <div class="tools-title">Industries</div>
+        <div class="tools-grid">
+          <span class="tool-tag">Real Estate</span>
+          <span class="tool-tag">B2B Services</span>
+          <span class="tool-tag">Personal Brand</span>
+          <span class="tool-tag">DTC / Telehealth</span>
+          <span class="tool-tag">Professional Services</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WORK SAMPLES -->
+<section id="work-samples">
+  <div class="section-label">Strategy Deliverables</div>
+  <h2 class="section-title reveal">Work that <em>proves the thinking.</em></h2>
+  <p class="section-intro reveal">Every deliverable below was created from scratch for a real client engagement — researched, written, and implemented.</p>
+  <div class="samples-grid">
+    <div class="sample-card reveal">
+      <div class="sample-num">01</div>
+      <div class="sample-tag">Audit · Strategy</div>
+      <div class="sample-title">Full Platform SWOT Audit — Alpine Legacy</div>
+      <p class="sample-body">SWOT analysis across LinkedIn (personal + company), Facebook, Instagram, YouTube, and GBP at onboarding. Identified platform-specific weaknesses, competitive threats, and opportunity maps that became the strategic roadmap for the entire 3-year engagement.</p>
+      <div class="sample-tags"><span class="sample-pill">Multi-platform</span><span class="sample-pill">Competitive analysis</span><span class="sample-pill">Opportunity mapping</span></div>
+    </div>
+    <div class="sample-card reveal">
+      <div class="sample-num">02</div>
+      <div class="sample-tag">Content Planning</div>
+      <div class="sample-title">52-Week Editorial Content Calendar</div>
+      <p class="sample-body">Full-year, week-by-week content calendar spanning LinkedIn, Facebook, Instagram, YouTube, and email. Tied seasonal events to platform-native formats — video tours, Story series, LinkedIn carousels, email drops — with weekly CTAs and promotional hooks built in.</p>
+      <div class="sample-tags"><span class="sample-pill">Cross-platform</span><span class="sample-pill">Seasonal strategy</span><span class="sample-pill">52-week scope</span></div>
+    </div>
+    <div class="sample-card reveal">
+      <div class="sample-num">03</div>
+      <div class="sample-tag">Ghostwriting · Brand Voice</div>
+      <div class="sample-title">Brand Voice Intake System + Social Media Blueprint</div>
+      <p class="sample-body">Built a structured brand voice extraction process to codify the founder's tone, vocabulary, and content posture. Used this as the foundation for a Social Media Strategy Blueprint 2.0 — an operational document defining content pillars, format rules, and engagement frameworks that ran for three years.</p>
+      <div class="sample-tags"><span class="sample-pill">Brand voice system</span><span class="sample-pill">Operational docs</span><span class="sample-pill">Ghostwritten 3 years</span></div>
+    </div>
+    <div class="sample-card reveal">
+      <div class="sample-num">04</div>
+      <div class="sample-tag">Email · Landing Pages</div>
+      <div class="sample-title">Property Landing Pages & Email Sequences</div>
+      <p class="sample-body">Designed and built property-specific landing pages inside KVCore and Luxury Presence platforms. Built MailChimp email sequences for listing promotion and lead nurture — writing copy, structuring flows, and managing deployment as part of the full content function owned independently for three years.</p>
+      <div class="sample-tags"><span class="sample-pill">KVCore</span><span class="sample-pill">Luxury Presence</span><span class="sample-pill">MailChimp</span><span class="sample-pill">Lead nurture</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">The Operator</div>
+  <div class="about-layout">
+    <div class="about-sidebar reveal">
+      <div class="about-avatar">
+        <img src="https://media.licdn.com/dms/image/v2/D5603AQFdK-S4_MdCfA/profile-displayphoto-shrink_400_400/B56ZPEhLCNHkAg-/0/1734215569263?e=1754524800&v=beta&t=placeholder" alt="Jp Imperial" class="avatar-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <span class="avatar-initials" style="display:none;">JPI</span>
+        <div class="avatar-amber-line"></div>
+      </div>
+      <div class="about-handle">@jpimperial</div>
+      <div class="about-name">Jp Imperial</div>
+      <div class="about-role">SMM · Content Strategist · AI Practitioner</div>
+    </div>
+    <div class="about-main reveal">
+      <p class="about-bio">I'm a social media manager and content strategist based in <strong>Metro Manila, Philippines</strong>, with 3+ years of embedded client work managing multi-platform social presence for real estate professionals in North America.</p>
+      <p class="about-bio">My approach is <strong>systems over campaigns</strong> — I build content architectures that compound over time rather than chase short-term spikes. Every platform I manage has a specific role in the trust funnel. I write all content myself, ghostwriting to match the client's authentic voice through a documented brand voice framework built at the start of every engagement.</p>
+      <p class="about-bio">I integrate AI tools as a working part of my daily workflow — <strong>Claude, ChatGPT, Gemini, Copilot, Perplexity, and Manus</strong> — for drafting, research, ideation, and custom workflow builds. Intermediate level: I build and configure custom AI setups, not just use the default interface.</p>
+      <div class="cred-list">
+        <div class="cred-item"><div class="cred-val">3<span class="amber">+</span></div><div class="cred-label">Years embedded SMM</div></div>
+        <div class="cred-item"><div class="cred-val">6</div><div class="cred-label">Platforms managed</div></div>
+        <div class="cred-item"><div class="cred-val">86</div><div class="cred-label">Transactions influenced</div></div>
+        <div class="cred-item"><div class="cred-val"><span class="amber">$0</span></div><div class="cred-label">Paid ad dependency</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section" id="contact">
+  <div class="cta-eyebrow">Let's work together</div>
+  <h2 class="cta-headline">Ready to build a presence that <em>compounds?</em></h2>
+  <p class="cta-sub">If you need a social media manager who thinks in systems, writes with substance, and uses AI to work faster without cutting corners — let's talk on LinkedIn.</p>
+  <div class="cta-actions">
+    <a href="https://www.linkedin.com/in/jpimperial" target="_blank" rel="noopener" class="btn-primary">View LinkedIn Profile</a>
+    <a href="https://www.linkedin.com/messaging/compose/?to=jpimperial" target="_blank" rel="noopener" class="btn-ghost">Send a Message</a>
+  </div>
+  <div class="cta-note">Response within 24 hours · Manila timezone (PHT, UTC+8)</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#hero" class="footer-logo">JP<span>.</span>Imperial</a>
+  <div class="footer-copy">© 2025 Jp Imperial · Social Media & Content Strategy</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/jpimperial" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://jpbimperial71675-cyber.github.io/jpimperial/portfolio" target="_blank" rel="noopener">Authority Portfolio</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const delay = el.dataset.delay ? parseInt(el.dataset.delay) : 0;
+      setTimeout(() => {
+        el.classList.add('visible');
+        if (el.classList.contains('skill-row')) {
+          const bar = el.querySelector('.skill-bar');
+          const pct = el.dataset.pct;
+          if (bar && pct) bar.style.width = pct + '%';
+        }
+      }, delay);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal, .stat-item, .skill-row').forEach(el => observer.observe(el));
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const start = performance.now();
+    const duration = 1800;
+    (function update(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if (p < 1) requestAnimationFrame(update);
+    })(start);
+  }
+  const cObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const delay = parseInt(entry.target.closest('[data-delay]')?.dataset.delay || 0);
+      setTimeout(() => animateCounter(entry.target), delay);
+      cObs.unobserve(entry.target);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => cObs.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
