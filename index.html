@@ -779,23 +779,56 @@
     .ai-inner { padding: 4rem 1.5rem; }
     .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 3rem 1.5rem; }
     .stat-item { padding: 1.5rem 1rem; }
+    .stat-num { font-size: 48px; }
+    /* CASE STUDY MOBILE */
     .case-study { grid-template-columns: 1fr; }
-    .case-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .case-left { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem; }
+    .case-right { padding: 1.5rem; }
+    .case-title { font-size: 22px; }
+    .case-desc { font-size: 13px; }
+    /* METRIC GRID MOBILE */
+    .metric-grid { grid-template-columns: 1fr 1fr; }
+    .metric-cell { padding: 1rem; }
+    .metric-big { font-size: 32px; }
+    .metric-small-label { font-size: 10px; letter-spacing: 0.06em; }
+    .metric-note { font-size: 10px; }
+    /* TIMELINE MOBILE */
+    .timeline-item { gap: 0.75rem; padding: 0.85rem 0; }
+    .t-year { font-size: 11px; min-width: 40px; }
+    .t-heading { font-size: 12px; }
+    .t-body { font-size: 11px; }
+    /* OTHER SECTIONS */
     .platforms-grid { grid-template-columns: 1fr 1fr; }
     .skills-layout { grid-template-columns: 1fr; }
     .samples-grid { grid-template-columns: 1fr; }
+    .sample-card { padding: 1.5rem; }
     .about-layout { grid-template-columns: 1fr; }
-    .about-avatar { aspect-ratio: 1; }
+    .about-avatar { aspect-ratio: 1; max-width: 220px; }
     .ai-grid { grid-template-columns: 1fr; gap: 2rem; }
     .ai-tools-grid { grid-template-columns: repeat(2, 1fr); }
     .cred-list { grid-template-columns: 1fr 1fr; }
     footer { flex-direction: column; padding: 2rem 1.5rem; }
     .divider { margin: 0 1.5rem; }
+    .cta-section { padding: 4rem 1.5rem; }
   }
   @media (max-width: 540px) {
     .platforms-grid { grid-template-columns: 1fr; }
     .ai-tools-grid { grid-template-columns: 1fr 1fr; }
-    .hero-headline { font-size: 58px; }
+    .hero-headline { font-size: 52px; }
+    /* EXTRA SMALL — case study metric grid goes full single col */
+    .metric-grid { grid-template-columns: 1fr 1fr; }
+    .metric-big { font-size: 28px; }
+    .metric-cell { padding: 0.85rem; }
+    .metric-small-label { font-size: 9px; }
+    .stats-bar { grid-template-columns: 1fr 1fr; padding: 2rem 1rem; }
+    .stat-num { font-size: 40px; }
+    .stat-label { font-size: 9px; }
+    .stat-sub { font-size: 10px; }
+    .case-title { font-size: 20px; }
+    .section-title { font-size: 28px; }
+    .sample-num { font-size: 52px; }
+    .tools-panel { padding: 1.25rem; }
+    .skill-bar-wrap { width: 80px; }
   }
 </style>
 </head>
@@ -1198,7 +1231,7 @@
   <div class="about-layout">
     <div class="about-sidebar reveal">
       <div class="about-avatar">
-        <img src="Jp LinkedIn Profile.jpg" alt="Jp Imperial" class="avatar-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <img src="https://media.licdn.com/dms/image/v2/D5603AQFdK-S4_MdCfA/profile-displayphoto-shrink_400_400/B56ZPEhLCNHkAg-/0/1734215569263?e=1754524800&v=beta&t=placeholder" alt="Jp Imperial" class="avatar-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <span class="avatar-initials" style="display:none;">JPI</span>
         <div class="avatar-amber-line"></div>
       </div>
